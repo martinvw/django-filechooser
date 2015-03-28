@@ -11,7 +11,10 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-
+   installation
+   quickstart
+   templates
+   history
 
 Indices and tables
 ==================
