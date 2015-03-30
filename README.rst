@@ -2,6 +2,9 @@
 Welcome to django-filechooser
 =============================
 
+.. image:: https://travis-ci.org/martinvw/django-filechooser.png?branch=master
+    :target: https://travis-ci.org/martinvw/django-filechooser
+
 Supply a server-side file-chooser in your Django application.
 
 
