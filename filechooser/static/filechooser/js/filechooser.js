@@ -12,7 +12,7 @@ $(document).ready(function() {
             { "render": function ( value, type, data, meta ) {
                 file = data['filename']
                 if (type == 'display'){
-                  url = (file['type'] == 'folder')  ? '#'+file['value'] : nexturl + encodeURIComponent(file['value']);
+                  url = (file['type'] == 'folder')  ? '#'+file['value'] : nexturl + encodeURI(file['value']);
 
                   content = "<span class=\"glyphicon glyphicon-"+file['icon']+"\" aria-hidden=\"true\"></span> &nbsp;";
                   return content + ' <a href="'+url+'" data-file-name="'+file['value']+'" class="file-type-'+file['type']+'">' + file['display'] + '</a>';
@@ -53,7 +53,7 @@ $(document).ready(function() {
 
     function changeDirectory(new_path){
       updateBreadCrumbs(new_path)
-      table.api().ajax.url(baseurl + encodeURIComponent(new_path)).load();
+      table.api().ajax.url(baseurl + encodeURI(new_path)).load();
     }
 
     function updateBreadCrumbs(local_path){
