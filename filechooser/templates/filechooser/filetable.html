@@ -1,0 +1,15 @@
+{% load i18n %}
+<ol class="breadcrumb" id="folder-breadcrumbs">
+  <li class="active"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></li>
+</ol>
+<div class="table-responsive">
+    <table id="{{filechooser_id}}" class="display" cellspacing="0" width="100%"  data-page-length='25'>
+      <thead>
+          <tr>
+              <th>{% trans "Filename" %}</th>
+              <th>{% trans "Filesize" %}</th>
+              <th>{% trans "Modification date" %}</th>
+          </tr>
+      </thead>
+    </table>
+  </div>
