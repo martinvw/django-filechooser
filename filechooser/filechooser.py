@@ -7,6 +7,7 @@ import urllib
 from operator import itemgetter
 
 from django.http import HttpResponse
+from django.conf.urls import url
 
 class FileChooser():
     def __init__(self, id, basedir, callback):
@@ -17,6 +18,9 @@ class FileChooser():
 
         self.callback = callback
         self.basedir = os.path.abspath(basedir)
+
+    def url_pattern(self):
+        return url(self.pattern, self.process, name='filechooser_'+self.id)
 
     def process(self, request, file=None, type=None, method=None):
         # make sure we can't get higher than the given basedir

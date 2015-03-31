@@ -9,9 +9,9 @@ from django.contrib.staticfiles.storage import staticfiles_storage as static
 FILECHOOSER_DEFAULTS = {
     'jquery_js_url': static.url('js/jquery.min.js'),
     'datatable_js_url': static.url('js/jquery.dataTables.min.js'),
-    'filechooser_js_url': static.url('js/filechooser.js'),
+    'filechooser_js_url': static.url('filechooser/js/filechooser.js'),
     'datatable_css_url': static.url('css/jquery.dataTables.min.css'),
-    'filechooser_css_url': static.url('css/filechooser.css'),
+    'filechooser_css_url': static.url('filechooser/css/filechooser.css'),
 }
 
 

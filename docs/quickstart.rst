@@ -13,6 +13,20 @@ Example template
 .. include:: example_template.rst
 
 
+Example urls.py
+---------------
+
+Note we call an object which is returned from the views to retrieve an url object to added to the list urls
+
+.. include:: example_urls.rst
+
+
+Example views
+-------------
+
+.. include:: example_views.rst
+
+
 Template tags and filters
 -------------------------
 
@@ -31,4 +45,3 @@ Demo application
 The demo application provides a number of useful examples.
 
 https://github.com/dyve/django-bootstrap3/tree/develop/demo
-

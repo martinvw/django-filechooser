@@ -7,10 +7,9 @@
   {% filechooser_css %}
 
   {# Display a filetabel #}
-  {% filechooser_filetable  %}
+  {% filechooser_filetable  id="identifier" %}
 
   {# Load CSS and JavaScript #}
-  {% filechooser_javascript id="identifier" browse_url="ajax_browse_url" next_url="next_page_url"%}
+  {% filechooser_javascript id="identifier" %}
 
   {# Read the documentation for more information #}
-

@@ -17,15 +17,15 @@ from ..settings import (
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
-def filechooser_filetable(context, id = None):
+def filechooser_filetable(context, id):
     """
     Return HTML for the datatabel which is used to display the files
     **Tag name**::
         filechooser_filetable
     **usage**::
-        {% filechooser_filetable %}
-    **example**::
         {% filechooser_filetable id="" %}
+    **example**::
+        {% filechooser_filetable id="filelist" %}
     """
 
     context['filechooser_id'] = id
@@ -48,7 +48,7 @@ def filechooser_css():
 
 
 @register.simple_tag(takes_context=True)
-def filechooser_javascript(context, id = None, jquery = None):
+def filechooser_javascript(context, id, jquery = None):
     """
     Return HTML for filechooser JavaScript, which also means the js
 	for the datatable and optionally the jquery.
@@ -60,11 +60,11 @@ def filechooser_javascript(context, id = None, jquery = None):
     **Tag name**::
         filechooser_javascript
     **Parameters**:
-        :jquery: True to include jQuery as well as the Datatable js
+        :jquery: True to include jQuery also
     **usage**::
-        {% filechooser_javascript %}
+        {% filechooser_javascript id=""%}
     **example**::
-        {% filechooser_javascript jquery=1 %}
+        {% filechooser_javascript id="filelist" jquery=1 %}
     """
     # See if we have to include jQuery
     if jquery is None:
@@ -76,6 +76,8 @@ def filechooser_javascript(context, id = None, jquery = None):
 
     context['scripts'] = urls
     context['filechooser_id'] = id
+    context['filechooser_url_id'] = 'filechooser_' + id
+    context['js_url'] = filechooser_js_url()
 
     return get_template('filechooser/filechooser.js').render(context)
 

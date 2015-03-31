@@ -12,8 +12,10 @@ $(document).ready(function() {
             { "render": function ( value, type, data, meta ) {
                 file = data['filename']
                 if (type == 'display'){
-                  content = "<span class=\"glyphicon glyphicon-"+file['icon']+"\" aria-hidden=\"true\"></span>";
-                  return content + ' &nbsp; <a href="#'+file['value']+'" data-file-name="'+file['value']+'" class="file-type-'+file['type']+'">' + file['display'] + '</a>';
+                  url = (file['type'] == 'folder')  ? '#'+file['value'] : nexturl + encodeURIComponent(file['value']);
+
+                  content = "<span class=\"glyphicon glyphicon-"+file['icon']+"\" aria-hidden=\"true\"></span> &nbsp;";
+                  return content + ' <a href="'+url+'" data-file-name="'+file['value']+'" class="file-type-'+file['type']+'">' + file['display'] + '</a>';
                 }
                 else
                   return data['filename']['value'];
@@ -37,22 +39,22 @@ $(document).ready(function() {
     // Add event for clicking on folders
     $(filechooser_id + ' tbody').on('click', 'a.file-type-folder', function () {
         changeDirectory($(this).data('file-name'))
-    } );
-
-    // Add event for clicking on files
-    $(filechooser_id + ' tbody').on('click', 'a.file-type-file', function () {
-        window.location.href = nexturl + encodeURIComponent($(this).data('file-name'));
-    } );
+    });
 
     // Add event for clicking on breadcrumbs
     $('#folder-breadcrumbs').on('click', 'a', function () {
         changeDirectory($(this).data('full-path'))
-    } );
+    });
 
     $(window).on('hashchange', function(){
           var page_path = document.location.hash.replace(/^#/, '')
           changeDirectory(page_path)
-    })
+    });
+
+    function changeDirectory(new_path){
+      updateBreadCrumbs(new_path)
+      table.api().ajax.url(baseurl + encodeURIComponent(new_path)).load();
+    }
 
     function updateBreadCrumbs(local_path){
       breadcrumbs = $('#folder-breadcrumbs')
@@ -62,7 +64,7 @@ $(document).ready(function() {
       if (local_path[0] != '/')
         local_path = '/' + local_path
 
-      // remove trailing /
+      // remove trailing '/'
       if (local_path[local_path.length-1] == '/')
         local_path = local_path.substring(0, local_path.length-1)
 
@@ -82,10 +84,5 @@ $(document).ready(function() {
     function print_dir_name(name){
       if (name == "") return '<span class="glyphicon glyphicon-home" aria-hidden="true"></span>';
       else return name;
-    }
-
-    function changeDirectory(new_path){
-      updateBreadCrumbs(new_path)
-      table.api().ajax.url(baseurl + encodeURIComponent(new_path)).load();
     }
 } );
