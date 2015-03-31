@@ -3,8 +3,34 @@ from __future__ import unicode_literals
 
 from django import template
 from django.template.loader import get_template
+from django.forms.widgets import flatatt
+
+try:
+    from django.utils.encoding import force_text
+except ImportError:
+    from django.utils.encoding import force_unicode as force_text
+
+from ..settings import (
+    datatable_css_url, filechooser_css_url, jquery_js_url, datatable_js_url, filechooser_js_url, get_filechooser_setting
+)
 
 register = template.Library()
+
+@register.simple_tag(takes_context=True)
+def filechooser_filetable(context, id = None):
+    """
+    Return HTML for the datatabel which is used to display the files
+    **Tag name**::
+        filechooser_filetable
+    **usage**::
+        {% filechooser_filetable %}
+    **example**::
+        {% filechooser_filetable id="" %}
+    """
+
+    context['filechooser_id'] = id
+
+    return get_template('filechooser/filetable.html').render(context)
 
 @register.simple_tag
 def filechooser_css():
@@ -17,12 +43,12 @@ def filechooser_css():
     **example**::
         {% filechooser_css %}
     """
-    urls = [url for url in [filechooser_css_url()] if url]
-    return ''.join([render_link_tag(url) for url in urls])
+    urls = [url for url in [datatable_css_url(), filechooser_css_url()] if url]
+    return ''.join([render_css_tag(url) for url in urls])
 
 
-@register.simple_tag
-def filechooser_javascript():
+@register.simple_tag(takes_context=True)
+def filechooser_javascript(context, id = None, jquery = None):
     """
     Return HTML for filechooser JavaScript, which also means the js
 	for the datatable and optionally the jquery.
@@ -40,17 +66,37 @@ def filechooser_javascript():
     **example**::
         {% filechooser_javascript jquery=1 %}
     """
-
-    javascript = ''
     # See if we have to include jQuery
     if jquery is None:
         jquery = get_filechooser_setting('include_jquery', False)
-    # NOTE: No async on scripts, not mature enough. See issue #52 and #56
-    if jquery:
-        url = bootstrap_jquery_url()
-        if url:
-            javascript += '<script src="{url}"></script>'.format(url=url)
-    url = bootstrap_javascript_url()
-    if url:
-        javascript += '<script src="{url}"></script>'.format(url=url)
-    return javascript
+
+    urls = [url for url in [datatable_js_url()] if url]
+
+    if jquery:  urls.prepend(bootstrap_jquery_url())
+
+    context['scripts'] = urls
+    context['filechooser_id'] = id
+
+    return get_template('filechooser/filechooser.js').render(context)
+
+
+def render_css_tag(url):
+    """
+    Render the css tag
+    """
+    return render_tag('link', attrs={'href': url, 'rel': 'stylesheet', 'media': 'all'}, self_close = True)
+
+
+def render_tag(tag, attrs=None, content=None, self_close=False):
+    """
+    Render a given tag, based on tag-name, attrs, content and whether it should be closed or not.
+    """
+    builder = "<{tag}{attrs}{self_close}>{content}"
+    if content or not self_close: builder += "</{tag}>"
+
+    return builder.format(
+        tag = tag,
+        attrs=flatatt(attrs) if attrs else '',
+        self_close='/' if self_close else '',
+        content=force_text(content) if content else ''
+        )
