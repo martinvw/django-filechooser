@@ -4,14 +4,14 @@
 import os
 import sys
 
-import bootstrap3
+import filechooser
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-version = bootstrap3.__version__
+version = filechooser.__version__
 
 if sys.argv[-1] == 'publish':
     os.system('cd docs && make html')

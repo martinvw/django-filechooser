@@ -1,4 +1,4 @@
-VERSION = '0.1'
+__version__ = '0.1'
 
 from filechooser.filechooser import FileChooser
 
