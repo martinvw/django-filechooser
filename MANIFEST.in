@@ -1,0 +1,4 @@
+include HISTORY.rst
+include LICENSE
+include README.rst
+recursive-include filechooser *.html *.png  *js *py
