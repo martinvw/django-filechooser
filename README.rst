@@ -29,7 +29,7 @@ Installation
 Example template
 ----------------
 
-.. include:: docs.example_template.rst
+.. include:: ./docs/example_template.rst
 
 Documentation
 -------------
