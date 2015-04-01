@@ -1,5 +1,5 @@
 from django.test import TestCase
-from filechooser import FileChooser
+from filechooser.filechooser import FileChooser
 
 class FileChooserTestCase(TestCase):
     ID = 'tEsTIdEnTiFiEr'

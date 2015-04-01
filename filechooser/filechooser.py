@@ -9,7 +9,7 @@ from operator import itemgetter
 from django.http import HttpResponse
 from django.conf.urls import url
 
-class FileChooser():
+class FileChooser(object):
     def __init__(self, id, basedir, callback = None):
         self.pattern = r'^filechooser/'+id+'/(?P<type>((ajax)|(http)))/(?P<method>((list)|(process)))/(?P<file>.*)$'
         self.id = id

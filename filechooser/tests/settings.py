@@ -1,6 +1,5 @@
 import django.conf.global_settings as DEFAULT_SETTINGS
 
-
 SECRET_KEY = 'test-secret-key'
 
 DATABASES = {
