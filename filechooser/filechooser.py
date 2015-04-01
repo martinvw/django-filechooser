@@ -6,7 +6,7 @@ import urllib
 
 from operator import itemgetter
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.conf.urls import url
 
 class FileChooser(object):
@@ -34,7 +34,7 @@ class FileChooser(object):
         if method == 'list' and type == 'ajax':
             return self.__ajax_list(file)
         elif method == 'process' and type == 'http':
-            if callback: return self.callback(file)
+            if self.callback: return self.callback(file)
         else:
             return HttpResponseNotFound("<h1>Requested operation not supported in FileChooser</h1>")
 
@@ -44,7 +44,6 @@ class FileChooser(object):
         records = []
 
         for filename in os.listdir(path):
-            print(filename)
             records.append(self.__process_file(folder, filename))
 
         result = {

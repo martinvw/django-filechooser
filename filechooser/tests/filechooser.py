@@ -1,12 +1,16 @@
+import json
+
 from django.test import TestCase
 from filechooser.filechooser import FileChooser
 
+from django.http import HttpResponse, HttpResponseNotFound
+
 class FileChooserTestCase(TestCase):
     ID = 'tEsTIdEnTiFiEr'
-    PATH = '/tmp'
+    PATH = '.'
 
     def setUp(self):
-        self.filechooser = FileChooser(self.ID, self.PATH, None)
+        self.filechooser = FileChooser(self.ID, self.PATH, callback_for_test)
 
 
     def test_filechooser_url_pattern_name(self):
@@ -50,6 +54,32 @@ class FileChooserTestCase(TestCase):
         for path in false_paths:
             self.assertFalse(pattern.resolve(path))
 
+    def test_filechooser_process_list(self):
+        """Validate whether the processing of a list works"""
+        result_json = self.filechooser.process(None, '', 'ajax', 'list').content.decode('utf8')
+
+        result = json.loads(result_json)
+        self.assertTrue(result_json)
+        self.assertTrue(result['data'])
+        self.assertEqual(result['data'][0]['order'], 'a.git')
+        self.assertEqual(result['data'][0]['filename']['display'], '.git')
+        self.assertEqual(result['data'][0]['filename']['type'], 'folder')
+        self.assertEqual(result['data'][0]['size']['display'], '-')
+        self.assertTrue(result['data'][0]['mtime'])
+
+    def test_filechooser_process_process(self):
+        """Validate whether the processing of a process request works"""
+        result = self.filechooser.process(None, '','http', 'process')
+
+        self.assertEqual(result, 'some_unique_info_from_callback')
+
+
+    def test_filechooser_process_false(self):
+        """Validate whether the processing of incorrect request is corretly handled"""
+        result_wrong_combination = self.filechooser.process(None, '', 'list', 'http')
+
+        self.assertIsInstance(result_wrong_combination, HttpResponseNotFound)
+
 
 def callback_for_test(filename):
-    pass
+    return 'some_unique_info_from_callback'
