@@ -54,8 +54,8 @@ The full documentation is at http://django-filechooser.readthedocs.org/.
 Requirements
 ------------
 
-- Python 3.2 or 3.3
-- Django >= 1.7
+- Python 3.2, 3.3 or 3.4
+- Django >= 1.6
 
 Contributions and pull requests for other Django and Python versions are welcome.
 
