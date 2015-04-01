@@ -5,6 +5,9 @@ Welcome to django-filechooser
 .. image:: https://travis-ci.org/martinvw/django-filechooser.png?branch=master
     :target: https://travis-ci.org/martinvw/django-filechooser
 
+.. image:: https://coveralls.io/repos/dyve/django-bootstrap3/badge.png?branch=master
+  :target: https://coveralls.io/r/dyve/django-bootstrap3?branch=master
+
 Supply a server-side file-chooser in your Django application.
 
 

@@ -1,0 +1,1 @@
+from filechooser.tests.filechooser import FileChooserTestCase

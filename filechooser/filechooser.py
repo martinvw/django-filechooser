@@ -10,8 +10,8 @@ from django.http import HttpResponse
 from django.conf.urls import url
 
 class FileChooser():
-    def __init__(self, id, basedir, callback):
-        self.pattern = r'^filechooser/'+id+'/(?P<type>[a-z]+)/(?P<method>[a-z]+)/(?P<file>.*)$'
+    def __init__(self, id, basedir, callback = None):
+        self.pattern = r'^filechooser/'+id+'/(?P<type>((ajax)|(http)))/(?P<method>((list)|(process)))/(?P<file>.*)$'
         self.id = id
 
         # check that id only contains a-z0-9
@@ -34,7 +34,7 @@ class FileChooser():
         if method == 'list' and type == 'ajax':
             return self.__ajax_list(file)
         elif method == 'process' and type == 'http':
-            return self.callback(file)
+            if callback: return self.callback(file)
         else:
             return HttpResponseNotFound("<h1>Requested operation not supported in FileChooser</h1>")
 
