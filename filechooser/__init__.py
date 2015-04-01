@@ -1,5 +1,5 @@
 __version__ = '0.1'
 
-from filechooser.filechooser import FileChooser
+from .filechooser import FileChooser
 
 __ALL__ = ['FileChooser']
