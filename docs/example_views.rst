@@ -1,4 +1,4 @@
-..code:: python
+.. code:: 
 
 # Import the FileChooser object
 from filechooser import FileChooser

@@ -44,6 +44,7 @@ class FileChooser():
         records = []
 
         for filename in os.listdir(path):
+            print(filename)
             records.append(self.__process_file(folder, filename))
 
         result = {
