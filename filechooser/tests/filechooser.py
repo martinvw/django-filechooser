@@ -54,6 +54,7 @@ class FileChooserTestCase(TestCase):
         for path in false_paths:
             self.assertFalse(pattern.resolve(path))
 
+
     def test_filechooser_process_list(self):
         """Validate whether the processing of a list works"""
         result_json = self.filechooser.process(None, '', 'ajax', 'list').content.decode('utf8')
@@ -67,6 +68,7 @@ class FileChooserTestCase(TestCase):
         self.assertEqual(result['data'][0]['size']['display'], '-')
         self.assertTrue(result['data'][0]['mtime'])
 
+
     def test_filechooser_process_process(self):
         """Validate whether the processing of a process request works"""
         result = self.filechooser.process(None, '','http', 'process')
@@ -75,10 +77,19 @@ class FileChooserTestCase(TestCase):
 
 
     def test_filechooser_process_false(self):
-        """Validate whether the processing of incorrect request is corretly handled"""
-        result_wrong_combination = self.filechooser.process(None, '', 'list', 'http')
+        """Validate whether the processing of incorrect requests is correctly handled"""
+        result_wrong_combination = self.filechooser.process(None, '', 'http', 'list')
 
         self.assertIsInstance(result_wrong_combination, HttpResponseNotFound)
+
+        result = None
+        with self.assertRaises(EnvironmentError) as cm:
+             result = self.filechooser.process(None, '../../', 'ajax', 'list')
+
+        exception = cm.exception
+        self.assertFalse(result)
+        self.assertEquals(str(exception), 'Do not try to escape from the designated folder')
+
 
 
 def callback_for_test(filename):
