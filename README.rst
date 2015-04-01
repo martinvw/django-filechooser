@@ -29,14 +29,7 @@ Installation
 Example template
 ----------------
 
-   .. code:: Django
-
-    {% load filechooser %}
-    {% filechooser_css %}
-
-    {# Display a file-list #}
-
-    {% filechooser_js %}
+.. include:: docs/example_template.rst
 
 Documentation
 -------------
