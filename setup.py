@@ -35,6 +35,7 @@ setup(
     author='Martin van Wingerden',
     author_email='martinvw@gmail.com',
     url='https://github.com/martinvw/django-filechooser',
+    download_url="https://github.com/martinvw/django-filechooser/archive/v0.1.0.tar.gz",
     packages=[
         'filechooser',
     ],
