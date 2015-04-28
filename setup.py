@@ -40,8 +40,7 @@ setup(
         'filechooser',
     ],
     include_package_data=True,
-    install_requires=[
-    ],
+    install_requires=['humanize>=0.5.0'],
     license="MIT",
     zip_safe=False,
     keywords='django-filechooser',
