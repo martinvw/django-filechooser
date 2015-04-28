@@ -11,13 +11,18 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = filechooser.__version__
+def get_metadata():
+    import re
+    with open(os.path.join("filechooser", "__init__.py")) as f:
+        return dict(re.findall("__([a-z]+)__ = ['\"]([^'\"]+)['\"]", f.read()))
+
+metadata = get_metadata()
 
 if sys.argv[-1] == 'publish':
     os.system('cd docs && make html')
     os.system('python setup.py sdist upload')
     print("You probably want to also tag the version now:")
-    print("  git tag -a %s -m 'version %s'" % (version, version))
+    print("  git tag -a %s -m 'version %s'" % (metadata['version'], metadata['version']))
     print("  git push --tags")
     sys.exit()
 
@@ -29,13 +34,13 @@ with open('HISTORY.rst') as history_file:
 
 setup(
     name='django-filechooser',
-    version=version,
+    version=metadata['version'],
     description="""jQuery Filechooser for Django projects""",
     long_description=readme + '\n\n' + history,
     author='Martin van Wingerden',
     author_email='martinvw@gmail.com',
     url='https://github.com/martinvw/django-filechooser',
-    download_url="https://github.com/martinvw/django-filechooser/archive/v0.1.0.tar.gz",
+    download_url="https://github.com/martinvw/django-filechooser/archive/v"+metadata['version']+".tar.gz",
     packages=[
         'filechooser',
     ],
