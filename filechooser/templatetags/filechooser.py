@@ -48,7 +48,7 @@ def filechooser_css():
 
 
 @register.simple_tag(takes_context=True)
-def filechooser_javascript(context, id, jquery = None):
+def filechooser_javascript(context, id, jquery = None, namespace = None):
     """
     Return HTML for filechooser JavaScript, which also means the js
 	for the datatable and optionally the jquery.
@@ -74,9 +74,12 @@ def filechooser_javascript(context, id, jquery = None):
 
     if jquery:  urls.prepend(bootstrap_jquery_url())
 
+    url = 'filechooser_' + id
+    if namespace: url = namespace + ':' + url
+
     context['scripts'] = urls
     context['filechooser_id'] = id
-    context['filechooser_url_id'] = 'filechooser_' + id
+    context['filechooser_url_id'] = url
     context['js_url'] = filechooser_js_url()
 
     return get_template('filechooser/filechooser.js').render(context)

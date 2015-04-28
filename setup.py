@@ -4,8 +4,6 @@
 import os
 import sys
 
-import filechooser
-
 try:
     from setuptools import setup
 except ImportError:
