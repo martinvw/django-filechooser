@@ -1,6 +1,8 @@
 =============================
 Welcome to django-filechooser
 =============================
+.. image:: https://badge.fury.io/py/django-filechooser.svg
+    :target: https://badge.fury.io/py/django-filechooser
 
 .. image:: https://travis-ci.org/martinvw/django-filechooser.png?branch=master
     :target: https://travis-ci.org/martinvw/django-filechooser
