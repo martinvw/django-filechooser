@@ -1,11 +1,11 @@
 language: python
 
 python:
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "nightly"
+  - 3.2
+  - 3.3
+  - 3.4
+  - 3.5
+  - nightly
   
 env:
   - DJANGO_VERSION=1.6.11
@@ -15,18 +15,18 @@ env:
 
 matrix:
   exclude:
-    - python: 3.5
-      env: 1.6.11
-    - python: nightly
-      env: 1.6.11
-    - python: 3.5
-      env: 1.7.11
-    - python: nightly
-      env: 1.7.11
     - python: 3.2
-      env: 1.9.5
+      env: DJANGO_VERSION=1.9.5
     - python: 3.3
-      env: 1.9.5
+      env: DJANGO_VERSION=1.9.5
+    - python: 3.5
+      env: DJANGO_VERSION=1.6.11
+    - python: 3.5
+      env: DJANGO_VERSION=1.7.11
+    - python: nightly
+      env: DJANGO_VERSION=1.6.11
+    - python: nightly
+      env: DJANGO_VERSION=1.7.11
 
 before_install:
   - if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then pip install 'coverage<4.0.0'; fi
