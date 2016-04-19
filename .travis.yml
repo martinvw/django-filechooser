@@ -4,14 +4,18 @@ python:
   - "3.2"
   - "3.3"
   - "3.4"
-
+  - "3.5"
+  - "nightly"
 env:
   - DJANGO_VERSION=1.6.10
   - DJANGO_VERSION=1.7.3
 
+before_install:
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then pip install 'coverage<4.0.0'; fi
+  - pip install coveralls
+  
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
-  - pip install coveralls
   - pip install -q Django==$DJANGO_VERSION --quiet
   - pip install humanize
   - pip install .
