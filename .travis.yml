@@ -23,6 +23,10 @@ matrix:
       env: 1.7.11
     - python: nightly
       env: 1.7.11
+    - python: 3.2
+      env: 1.9.5
+    - python: 3.3
+      env: 1.9.5
 
 before_install:
   - if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then pip install 'coverage<4.0.0'; fi
