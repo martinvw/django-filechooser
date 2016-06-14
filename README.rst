@@ -7,9 +7,6 @@ Welcome to django-filechooser
 .. image:: https://img.shields.io/pypi/status/django-filechooser.svg?maxAge=2592000   
     :target: https://pypi.python.org/pypi/django-filechooser
     
-.. image:: https://img.shields.io/pypi/dm/django-filechooser.svg?maxAge=2592000   
-    :target: https://pypi.python.org/pypi/django-filechooser
-    
 .. image:: https://travis-ci.org/martinvw/django-filechooser.png?branch=master
     :target: https://travis-ci.org/martinvw/django-filechooser
 
