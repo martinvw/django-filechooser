@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django import template
 from django.template.loader import get_template
 from django.forms.widgets import flatatt
+from django.utils.safestring import mark_safe
 
 try:
     from django.utils.encoding import force_text
@@ -44,7 +45,7 @@ def filechooser_css():
         {% filechooser_css %}
     """
     urls = [url for url in [datatable_css_url(), filechooser_css_url()] if url]
-    return ''.join([render_css_tag(url) for url in urls])
+    return mark_safe(''.join([render_css_tag(url) for url in urls]))
 
 
 @register.simple_tag(takes_context=True)
