@@ -81,8 +81,3 @@ Author
 ------
 
 Developed and maintained by Martin van Wingerden
-
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
-
-[![Beerpay](https://beerpay.io/martinvw/django-filechooser/badge.svg?style=beer-square)](https://beerpay.io/martinvw/django-filechooser)  [![Beerpay](https://beerpay.io/martinvw/django-filechooser/make-wish.svg?style=flat-square)](https://beerpay.io/martinvw/django-filechooser?focus=wish)
